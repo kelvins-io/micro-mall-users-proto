@@ -11,6 +11,12 @@ service UsersService {
             get: "/v1/user/info"
         };
     }
+    // 获取用户信息-手机号
+    rpc GetUserInfoByPhone(GetUserInfoByPhoneRequest) returns (GetUserInfoByPhoneResponse) {
+        option (google.api.http) = {
+            get: "/v1/user/info/by_phone"
+        };
+    }
 
 }
 
@@ -51,6 +57,8 @@ enum RetCode {
     USER_EXIST = 50002;
     MERCHANT_NOT_EXIST = 50003;
     MERCHANT_EXIST = 50004;
+    ACCOUNT_EXIST = 50005;
+    ACCOUNT_NOT_EXIST = 50006;
 }
 
 enum OperationType {
@@ -58,6 +66,33 @@ enum OperationType {
     UPDATE = 1;
     DELETE = 2;
     AUDIT = 3;
+}
+
+enum CoinType {
+    CNY = 0;
+    USD = 1;
+}
+
+enum AccountState {
+    NORMAL = 0;
+    LOCK = 1;
+    INVALID = 2;
+}
+
+enum AccountType {
+    PERSONAL = 0;
+    COMPANY = 1;
+    SYSTEM = 2;
+}
+
+message GetUserInfoByPhoneRequest {
+    string country_code = 1;
+    string phone = 2;
+}
+
+message GetUserInfoByPhoneResponse {
+    CommonResponse common =1;
+    UserInfo info = 2;
 }
 
 message GetUserInfoRequest {
