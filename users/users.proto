@@ -258,6 +258,7 @@ message UserAccountChargeRequest {
     AccountType account_type = 2; // 账户类型
     CoinType coin_type = 3; // 币种
     string amount = 4; // 数量
+    string out_trade_no = 5; // 外部交易号
 
     OperationMeta op_meta = 199;
 }
